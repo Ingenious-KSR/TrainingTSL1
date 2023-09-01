@@ -4,17 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src = "script_validation.js"></script>
 </head>
 <body>
-    <form action="">
-        <label for="name">Name</label><br>
-        <input type="text" id="name" required><br>
-        <label for="phone">Phone</label><br>
-        <input type="phone" id="phone" required><br>
-        <label for="email">E-mail</label><br>
-        <input type="email" id="email" required><br>
-        <input type="button" value="submit"><br>
-
+    <form id = 'cid'>
+        <label for  = 'uname'>uname</label>
+        <input id = 'uname' type = 'text'>
+        <br>
+        <label for = 'phno'>phno-</label>
+        <input id = 'phno' type = 'text'>
+        <br>
+        <label for = 'age'>age--</label>
+        <input id = 'age' type = 'text'>
+        <br>
+        <br>
+        <input type = 'submit' value="submit">
+        
     </form>
+
+    <div id="errorMessages" class = 'error'></div>
+
+    <script>
+        const form = document.getElementById("cid");
+        const errorMessages = document.getElementById("errorMessages");
+        form.addEventListener("submit",function (event) {
+            const phoneNumber = document.getElementById("phno").value;
+            const age = document.getElementById("age").value;
+
+            // Phone number validation: Check for a 10-digit number
+            if (!/^\d{10}$/.test(phoneNumber)) {
+                displayError("Phone number must be a 10-digit number");
+                event.preventDefault();
+            }
+
+            // Age validation: Check if age is between 18 and 99
+            if (age < 18 || age > 99) {
+                displayError("Age must be between 18 and 99");
+                event.preventDefault();
+            }
+        });
+
+        function displayError(message) {
+            const errorMessage = document.createElement("p");
+            errorMessage.textContent = message;
+            errorMessages.appendChild(errorMessage);
+        }
+    </script>
+    
 </body>
 </html
